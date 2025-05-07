@@ -1,22 +1,18 @@
-import { useReducer } from "react";
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import { useState } from "react";
+import {BrowserRouter,Routes,Route } from 'react-router-dom'
 import Home from "../pages/Home";
 import TotoPage from "../pages/TotoPage";
 
-const reduser = (state,action) =>{
-  return state
-}
 
 function App() {
-  const [state,dispatch] = useReducer({
-    user: null,
-    tasks: []
-  })
+  const [user,setUser] = useState(null)
+  const [tasks, setTasks] = useState([])
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/tasks" element={<TotoPage/>}/>
+        <Route path="/" element={<Home sendUser={setUser}/>}/>
+        <Route path="/tasks" element={<TotoPage user={user}/>}/>
       </Routes>
     </BrowserRouter>
   );
