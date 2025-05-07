@@ -1,18 +1,20 @@
 import React from 'react';
 import {Formik,Form,Field,ErrorMessage}  from 'formik'
+import {format} from 'date-fns'
 
 
-const SignUp = () => {
+const SignUp = (props) => {
     const initialValues = {
         firstName: '',
         lastName: '',
         email: '',
         passwordHash: '',
-        birthday: new Date()
+        birthday: format(new Date(),'yyyy-MM-dd')
     }
 
     const onSubmitFromik = (values,actions)=>{
-        console.log(values, 'NIGGERS');
+        props.sendData(values)
+        actions.resetForm()
     }
 
     return (
@@ -26,6 +28,7 @@ const SignUp = () => {
                         <Field name='email' placeholder='Type your email'/>
                         <Field name='passwordHash' placeholder='Type your password'/>
                         <Field name='birthday' type='date'/>
+                        <button type='submit'>Submit</button>
                     </Form>
                 )}
             </Formik>

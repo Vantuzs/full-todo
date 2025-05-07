@@ -1,12 +1,18 @@
-import {API_BASE} from '../constatns'
+import CONSTANTS from '../constatns'
 
-export const registerUser = (data)=>{
-    return fetch(`${API_BASE}/users/registration`,{
+export const registerUser = async (data)=>{
+    const response = await fetch(`${CONSTANTS.API_BASE}/users/sign-up`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.json());
+    
+    if(response.status === 400){
+        const res = await response.json();
+        return Promise.reject(res.err);
+    }
+
+    return response.json()
 }
