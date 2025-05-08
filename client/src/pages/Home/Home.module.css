@@ -1,0 +1,35 @@
+.container{
+    background-color: lightskyblue;
+    padding: 20px;
+    height: 100vh;
+}
+
+.form-wrapper{
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    form{
+        display: flex;
+        flex-direction: column;
+        * {
+            margin-bottom: 5px;
+            height: 1.8em;
+            padding: 3px;
+            border: none;
+            border-radius: 2px;
+            background-color:rgb(204, 233, 252);
+        }
+    }
+}
+
+.error-container{
+    color: aliceblue;
+    border: 2px dashed red;
+    background-color: brown;
+    margin: 10px;
+    padding: 10px;
+}

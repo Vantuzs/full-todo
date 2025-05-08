@@ -1,3 +1,4 @@
+const NotFoundError = require("../errors/NotFound");
 const { User } = require("../models");
 const bcrypt = require('bcrypt');
 
@@ -8,7 +9,7 @@ module.exports.registrationUser = async(req,res,next) =>{
         if(!createUser){
             return res.status(404).send('User not found =(')
         }
-        return res.status(201).send(createUser)
+        return res.status(201).send({data: createUser})
     } catch (error) {
         next(error)
     }
@@ -26,9 +27,11 @@ module.exports.loginUser = async(req,res,next) =>{
         if(foundUser) {
             const result = await bcrypt.compare(password,foundUser.passwordHash);
             if(!result){
-                return next(new Error('U tebya penis malenky'));
+                throw new NotFoundError('Incorect password ');
             }
-            return res.status(200).send('U tebya Penis Bolshoy')
+            return res.status(200).send({data: foundUser})
+        } else{
+            throw new NotFoundError('Incorect email');
         }
     } catch (error) {
         next(error)
