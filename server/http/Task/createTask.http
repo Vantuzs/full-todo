@@ -1,0 +1,10 @@
+POST http://localhost:5000/api/tasks/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "authorId":"681c937b6184035eff45541e",
+    "body":"Проанализировать рынок пива",
+    "createdAt":"2025-05-09",
+    "deadline":"2025-05-09",
+    "status":"DONE"
+}
