@@ -5,7 +5,7 @@ import SignUp from '../../Components/SignUp/SignUp';
 import styles from './Home.module.css'
 
 const Home = (props) => {
-    const [state,setState] = useState(true); // true -> SingUp : false -> SingIn
+    const [state,setState] = useState(false); // true -> SingUp : false -> SingIn
     // const [data,setData] = useState();
     const [error,setError] = useState(null);
     const [isLoading,setIsLoading] = useState(true);
