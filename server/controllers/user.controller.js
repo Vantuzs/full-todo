@@ -1,7 +1,7 @@
 const NotFoundError = require("../errors/NotFound");
 const { User } = require("../models");
 const bcrypt = require('bcrypt');
-const {createToken,verifyToken} = require('../middlewares/createSession')
+const {createToken,verifyToken} = require('../services/createSession')
 
 module.exports.registrationUser = async(req,res,next) =>{
     try {
@@ -10,7 +10,10 @@ module.exports.registrationUser = async(req,res,next) =>{
         if(!createUser){
             return res.status(404).send('User not found =(')
         }
-        return res.status(201).send({data: createUser})
+
+        const token = await createToken({userId: foundUser._id,email: foundUser.email})
+
+        return res.status(201).send({data: createUser},{tokens: {token}})
     } catch (error) {
         next(error)
     }
@@ -31,8 +34,7 @@ module.exports.loginUser = async(req,res,next) =>{
                 throw new NotFoundError('Incorect password ');
             }
             const token = await createToken({userId: foundUser._id,email: foundUser.email})
-            console.log(token);
-            // return res.status(200).send({data: foundUser})
+            return res.status(200).send({data: foundUser,tokens: {token}})
         } else{
             throw new NotFoundError('Incorect email');
         }
@@ -44,8 +46,13 @@ module.exports.loginUser = async(req,res,next) =>{
 module.exports.checkToken = async(req,res,next) =>{
     try {
         const {params: {token}} = req;
-        const result = await verifyToken(token);
-        console.log(result);
+        const payload = await verifyToken(token);
+
+        const foundUser = await User.findOne({
+            _id: payload.userId
+        });
+
+        return res.status(200).send({data: foundUser})
     } catch (error) {
         next(error)
     }
