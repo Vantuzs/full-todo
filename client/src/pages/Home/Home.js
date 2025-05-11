@@ -32,9 +32,12 @@ const Home = (props) => {
             props.sendUser(result.data)
             // token -> localStorage
             localStorage.setItem('token', result.tokens.token)
+            console.log(1);
             navigate('/tasks')
+            console.log(2);
         })
         .catch((err)=>{
+          console.log(err);
             setError(err);
         })
         .finally(()=>{

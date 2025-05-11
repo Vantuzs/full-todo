@@ -13,7 +13,7 @@ module.exports.registrationUser = async(req,res,next) =>{
 
         const token = await createToken({userId: createUser._id,email: createUser.email})
 
-        return res.status(201).send({data: createUser},{tokens: {token}})
+        return res.status(201).send({data: createUser,tokens: {token}})
     } catch (error) {
         next(error)
     }

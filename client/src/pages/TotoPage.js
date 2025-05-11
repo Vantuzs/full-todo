@@ -27,6 +27,7 @@ const TotoPage = (props) => {
           // делаем запрос на получение юзера
           authUser(token)
           .then(userData=>{
+            console.log(3);
             props.sendUser(userData.data)
           })
           .catch(err=>{
