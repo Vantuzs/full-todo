@@ -11,7 +11,7 @@ module.exports.registrationUser = async(req,res,next) =>{
             return res.status(404).send('User not found =(')
         }
 
-        const token = await createToken({userId: foundUser._id,email: foundUser.email})
+        const token = await createToken({userId: createUser._id,email: createUser.email})
 
         return res.status(201).send({data: createUser},{tokens: {token}})
     } catch (error) {
