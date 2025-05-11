@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {BrowserRouter,Routes,Route } from 'react-router-dom'
 import Home from "../pages/Home/Home";
-import TotoPage from "../pages/TotoPage";
+import Dashboard from "./Dashboard/Dashboard";
 import './App.css'
 
 
@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home sendUser={setUser}/>}/>
-        <Route path="/tasks" element={<TotoPage user={user} sendUser={setUser}/>}/>
+        <Route path="/tasks" element={<Dashboard user={user} sendUser={setUser}/>}/>
       </Routes>
     </BrowserRouter>
   );
