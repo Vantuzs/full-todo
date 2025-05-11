@@ -3,7 +3,7 @@ import TodoList from '../Components/TodoList/TodoList';
 import { getTasks,createTask } from '../api/taskApi';
 import TodoForm from '../Components/TodoForm/TodoForm';
 
-const TotoPage = (props) => {
+const TotoPage = () => {
     const [todos,setTodos] = useState([]);
 
     useEffect(()=>{
