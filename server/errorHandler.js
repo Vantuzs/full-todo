@@ -1,6 +1,7 @@
 const {Error: {ValidationError,CastError}} = require('mongoose');
 const NotFoundError = require('./errors/NotFound');
 const {JsonWebTokenError, TokenExpiredError} = require('jsonwebtoken');
+const RefreshTokenError = require('./errors/RefreshTokenError');
 
 module.exports.errorHandler = async (err,req,res,next) =>{
     if(err instanceof ValidationError){
@@ -20,6 +21,10 @@ module.exports.errorHandler = async (err,req,res,next) =>{
     if(err instanceof JsonWebTokenError || err instanceof TokenExpiredError){
         return res.status(403).send({err: 'Не Валидный ТОКЕН'})
     }
+
+    if(err instanceof RefreshTokenError){
+        return res.status(401).send({err: err.message})
+    }
     console.log(err);
-    return res.status(err.status ?? 500).send({err: 'Server error'})
+    return res.status(err.status ?? 500).send({err: err.message})
 }

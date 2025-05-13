@@ -1,5 +1,9 @@
-const CONSTANTS = {
-    SALT_ROUNDS: 5
-}
 
-module.exports = CONSTANTS;
+module.exports = {
+    SALT_ROUNDS: 5,
+    ACCESS_EXPIRES_TIME: 30,
+    REFRESH_EXPIRES_TIME: 60, // "1h"
+
+    ACCESS_SECRET: 'Euro-2024',
+    REFRESH_SECRET: 'ABRACADABRA'
+};
