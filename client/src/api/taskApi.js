@@ -1,13 +1,13 @@
 import CONSTANTS from '../constatns';
 import history from '../BrowserHistory';
+import { refershSession } from './userApi';
 
 export const getTasks = async()=>{
-    const token = localStorage.getItem('token');
-
+    const accessToken = localStorage.getItem('accessToken');
     const response = await fetch(`${CONSTANTS.API_BASE}/tasks`,{
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${accessToken}`
         }
     })
 
@@ -17,22 +17,24 @@ export const getTasks = async()=>{
     }
 
     if(response.status === 403){
-        const error = await response.json();
-        history.push('/');
-        return Promise.reject(error);
+        // const error = await response.json();
+        // history.push('/');
+        // return Promise.reject(error);
+        await refershSession();
+        return await getTasks();
     }
 
     return response.json()
 }
 
 export const createTask = async(data)=>{
-    const token = localStorage.getItem('token');
+    const accessToken = localStorage.getItem('accessToken');
 
     const response = await fetch(`${CONSTANTS.API_BASE}/tasks`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(data)
     })
@@ -44,9 +46,8 @@ export const createTask = async(data)=>{
     }
 
     if(response.status === 403){
-        const error = await response.json();
-        history.push('/');
-        return Promise.reject(error);
+        await refershSession();
+        return await getTasks();
     }
 
     return response.json();

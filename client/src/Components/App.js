@@ -13,19 +13,13 @@ function App() {
 
   useEffect(()=>{
     if(!user){
-      const token = localStorage.getItem('token');
-
-      if(token){
-        authUser(token)
+        authUser()
         .then(userData=>{
         setUser(userData.data)
         })
         .catch(err=>{
         return history.push('/');
         })
-      } else {
-        return history.push('/');
-      }
     }
   },[])
 

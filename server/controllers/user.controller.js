@@ -104,7 +104,7 @@ module.exports.refreshSession = async (req,res,next) =>{
             const newRefreshToken = await createRefreshToken({userId: user._id,email: user.email});
 
             await RefreshToken.create({token: newRefreshToken,userId: user._id});
-            return res.status(200).send({tokens: {newAccessToken,newRefreshToken}});
+            return res.status(200).send({tokens: {accessToken: newAccessToken,refreshToken: newRefreshToken}});
         } 
     } else{
         return res.status(401).send({error: 'IDI NAHUI'})
