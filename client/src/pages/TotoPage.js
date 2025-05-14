@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TodoList from '../Components/TodoList/TodoList';
-import { getTasks,createTask } from '../api/taskApi';
+import { getTasks,createTask,deleteTask } from '../api/taskApi';
 import TodoForm from '../Components/TodoForm/TodoForm';
 
 const TotoPage = () => {
@@ -31,11 +31,21 @@ const TotoPage = () => {
       })
     }
 
+    const delTask = (id)=>{
+      deleteTask(id)
+      .then(({data: deletedTask})=>{
+        setTodos(todos.filter(task=>task._id!==deletedTask._id)) //Check
+      })
+      .catch(error=>{
+        console.error(error);
+      })
+    }
+
     return (
         <>
           <h1>TodoList</h1>
           <TodoForm sendData={getNewTodo}/>
-          <TodoList todos={todos}/>
+          <TodoList todos={todos} dellCallback={delTask}/>
 
  
         </>
