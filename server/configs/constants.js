@@ -1,7 +1,7 @@
 
 module.exports = {
     SALT_ROUNDS: 5,
-    ACCESS_EXPIRES_TIME: 10,
+    ACCESS_EXPIRES_TIME: 60,
     REFRESH_EXPIRES_TIME: 60 * 60, // "1h"
 
     ACCESS_SECRET: 'Euro-2024',

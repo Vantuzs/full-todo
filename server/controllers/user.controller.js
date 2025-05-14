@@ -48,6 +48,8 @@ module.exports.loginUser = async(req,res,next) =>{
     }
 }
 
+////////// Auth
+
 module.exports.checkAuth = async(req,res,next) =>{
     try {
         const {tokenPayload: {userId}} = req;
