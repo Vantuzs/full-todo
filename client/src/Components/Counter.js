@@ -1,30 +1,23 @@
 import React, { useReducer, useState } from 'react';
-import {connect} from 'react-redux'
-
-
+import {connect} from 'react-redux';
+import {incrementAction, decrementAction} from '../actions/actionCreater'
 
 const Counter = (props) => {
     
-    const increment = ()=>{
-        const action = {
-            type: 'COUNTER_PLUS'
-        }
-        props.dispatch(action);
-    }
-    const decrement = ()=>{
-        const action = {
-            type: 'COUNTER_MINUS'
-        }
-        props.dispatch(action);
-    }
+    // const increment = ()=>{
+    //     props.dispatch(createActionIncrement());
+    // }
+    // const decrement = ()=>{
+    //     props.dispatch(createActionDecrement());
+    // }
     
     
     console.log(props)
     return (
         <>
             <h1>{props.counter}</h1>
-            <button onClick={increment}>+</button>
-            <button onClick={decrement}>-</button>
+            <button onClick={props.increment}>+</button>
+            <button onClick={props.decrement}>-</button> 
         </>
     );
 }
@@ -33,7 +26,19 @@ const mapStateToProps = (state) => {
     return state
 }
 
-const WrappedCounter = connect(mapStateToProps)(Counter);
+// const mapDispatchToProps = (dispatch)=>{
+//     return {
+//         increment: ()=> dispatch(incrementAction()),
+//         decrement: ()=> dispatch(decrementAction())
+//     }
+// }
+
+const mapDispatchToProps = {
+    increment: incrementAction,
+    decrement: decrementAction
+}
+
+const WrappedCounter = connect(mapStateToProps,mapDispatchToProps)(Counter);
 
 export default WrappedCounter;
 
@@ -43,6 +48,9 @@ connect - функция, которя принимает 2 опциональн
 
 - mapStateToProps
 Функция, которая принимает ВЕСЬ стейт и возвращает только ту часть стейта, которая нужжна именно этой компоненте
+
+- mapDispatchToProps
+Функцияб которая возвращает объект, в котором наши actionCreator`s обворачиваются disoatchem
 
 Кариювання фукнций - трансфо
 f(a,b,c) -> f(a)(b)(c)
