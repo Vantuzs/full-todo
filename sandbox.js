@@ -96,3 +96,25 @@ const test2 = testGenerator()
 for(let i = 0;i<=101;i++){
     console.log(test2.next());
 }
+
+console.log(123);
+
+const str = 'потоп';
+
+const isPolindrom = (str)=>{
+
+    const str2 = str.split('').reverse();
+    const str3 = str.split('')
+
+    let Bla;
+
+    for(let i=0; i<=str2.length;i++){
+        if(str3[i]!==str2[i]){
+            Bla=false
+            break;
+        } else{
+            Bla=true
+        }
+    }
+    return Bla
+}

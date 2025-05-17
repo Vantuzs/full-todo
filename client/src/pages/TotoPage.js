@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TodoList from '../Components/TodoList/TodoList';
-import { getTasks,createTask,deleteTask } from '../api/taskApi';
+// import { getTasks,createTask,deleteTask } from '../api/taskApi';
+import { getTasks,createTask,deleteTask } from '../api/axiosApi';
 import TodoForm from '../Components/TodoForm/TodoForm';
 
 const TotoPage = () => {
@@ -8,8 +9,8 @@ const TotoPage = () => {
 
     useEffect(()=>{
         getTasks()
-        .then(result=>{
-          setTodos(result.data)
+        .then(({data: {data}})=>{
+          setTodos(data)
         })
         .catch(err=>{
           console.log(err);
@@ -22,7 +23,7 @@ const TotoPage = () => {
         createdAt: new Date(),
         ...data
       })
-      .then(({data: createdTask})=>{
+      .then(({data: {data: createdTask}})=>{
         console.log(createdTask);
         setTodos([...todos,createdTask])
       })
@@ -33,7 +34,7 @@ const TotoPage = () => {
 
     const delTask = (id)=>{
       deleteTask(id)
-      .then(({data: deletedTask})=>{
+      .then(({data: {data: deletedTask}})=>{
         setTodos(todos.filter(task=>task._id!==deletedTask._id)) //Check
       })
       .catch(error=>{

@@ -12,15 +12,15 @@ function App() {
   const [tasks, setTasks] = useState([])
 
   useEffect(()=>{
-    if(!user){
-        authUser()
-        .then(userData=>{
-        setUser(userData.data)
-        })
-        .catch(err=>{
-        return history.push('/');
-        })
-    }
+    // if(!user){
+    //     authUser()
+    //     .then(userData=>{
+    //     setUser(userData.data)
+    //     })
+    //     .catch(err=>{
+    //     return history.push('/');
+    //     })
+    // }
   },[])
 
   return (
