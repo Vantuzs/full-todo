@@ -11,3 +11,12 @@ export const decrementAction = ()=>{
         type: ACTION_TYPES.DECREMENT
     })
 }
+
+export const stepAction = (step)=>{
+    return ({
+        type: ACTION_TYPES.STEP,
+        payload: {
+            step
+        }
+    })
+}

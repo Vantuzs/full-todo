@@ -118,3 +118,110 @@ const isPolindrom = (str)=>{
     }
     return Bla
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// раставьте цифры в логи так, что бы при выводе все шло по порядку
+
+console.log('');
+
+setTimeout(()=>{
+    console.log('');
+})
+
+new Promise((res,rej)=>{
+    console.log('');
+    res()
+}).then(()=>{
+    console.log();
+})
+
+Promise.resolve().then(()=>{
+    console.log();
+}).then(()=>{
+    console.log('');
+})
+
+Promise.resolve().then(()=>{
+    console.log();
+}).then(()=>{
+    console.log('');
+})
+
+console.log('');
+
+// Ответ
+
+console.log('1');
+
+setTimeout(()=>{
+    console.log('9');
+})
+
+new Promise((res,rej)=>{
+    console.log('2');
+    res()
+}).then(()=>{
+    console.log('4');
+})
+
+Promise.resolve().then(()=>{
+    console.log('5');
+}).then(()=>{
+    console.log('7');
+})
+
+Promise.resolve().then(()=>{
+    console.log('6');
+}).then(()=>{
+    console.log('8');
+})
+
+console.log('3');
+
+
+
+
+
+///////////////////
+
+// Необходимо реализовать класс AsyncQueue который позволяет выполнять функции последовательно, даже если они возвращают промисы
+
+const queue = new AsyncQueue();
+
+queue.add(()=>console.log('1'))
+queue.add(
+    ()=>
+        new Promise((resolve)=>{
+            setTimeout(()=>{
+                console.log('2');
+                resolve();
+            },1000)
+        })
+)
+queue.add(()=>console.log('3'))
+queue.add(
+    ()=>
+        new Promise((resolve)=>{
+            setTimeout(()=>{
+                console.log('4');
+                resolve();
+            },500)
+        })
+)
