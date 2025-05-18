@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import {connect} from 'react-redux';
-import {incrementAction, decrementAction,stepAction} from '../actions/actionCreater'
+import {incrementAction, decrementAction,stepAction,requestCounterFetching} from '../actions/actionCreater'
 
 const Counter = (props) => {
     // const increment = ()=>{
@@ -17,17 +17,22 @@ const Counter = (props) => {
         props.stepChange(Number(value))
      }
     
-    
-    console.log(props)
     return (
         <>
             <h1>{props.counter}</h1>
             <input type='number' name='step' placeholder='123?' value={props.step}  onChange={inputeHandler}/>
             <button onClick={props.increment}>+</button>
             <button onClick={props.decrement}>-</button> 
+            <h3>{props.serverResponse? props.serverResponse.ServerResponce:'0'}</h3>
+            
+
+            <button onClick={()=>{props.requestFetching(props.counter)}}>Send counter to backend</button>
         </>
     );
 }
+
+
+
 
 const mapStateToProps = (state) => {
     return state
@@ -43,7 +48,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     increment: incrementAction,
     decrement: decrementAction,
-    stepChange: stepAction
+    stepChange: stepAction,
+    requestFetching: requestCounterFetching
 }
 
 const WrappedCounter = connect(mapStateToProps,mapDispatchToProps)(Counter);

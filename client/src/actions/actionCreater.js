@@ -20,3 +20,27 @@ export const stepAction = (step)=>{
         }
     })
 }
+
+
+// Заросы на сервер
+
+export const requestCounterFetching = (counter)=>{
+    return ({
+        type: ACTION_TYPES.REQUEST_COUNTER_FETCHING,
+        payload: counter
+    });
+}
+
+export const requestCounterSuccess = (data)=>{
+    return ({
+        type: ACTION_TYPES.REQUEST_COUNTER_SUCCESS,
+        payload: data
+    })
+}
+
+export const requestCounterError = (err)=>{
+    return ({
+        type: ACTION_TYPES.REQUEST_COUNTER_ERROR,
+        payload: err
+    })
+}
