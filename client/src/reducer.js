@@ -1,55 +1,77 @@
 import ACTION_TYPES from './actions/actionTypes'
 
 const initialState = {
-    counter: 0,
-    step: 1,
-    isFetching: false,
-    serverResponse: null,
+    user: null,
+    tasks: [],
+    isLoading: false,
     error: null
   }
 
 const reducer = (state = initialState,action) =>{
     switch(action.type){
-      case ACTION_TYPES.INCREMENT: {
+      case ACTION_TYPES.LOGIN_USER_ERROR:
+        case ACTION_TYPES.REGISTER_USER_ERROR:
+          case ACTION_TYPES.GET_TASKS_ERROR:
+            case ACTION_TYPES.CREATE_TASK_ERROR:
+              case ACTION_TYPES.DELETE_TASK_ERROR: {
+        const {payload: error} = action;
+
         return {
-          ...state,
-          counter: state.counter + state.step
-        }
-      }
-      case ACTION_TYPES.DECREMENT: {
-        return {
-          ...state,
-          counter: state.counter - state.step
-        }
-      }
-      case ACTION_TYPES.STEP: {
-        return {
-            ...state,
-            step: action.payload.step
-        }
-      }
-      case ACTION_TYPES.REQUEST_COUNTER_FETCHING: {
-        return {
-          ...state,
-          isFetching: !state.isFetching
-        }
-      }
-      case ACTION_TYPES.REQUEST_COUNTER_SUCCESS: {
-        const {payload: data} = action
-        return {
-          ...state,
-          serverResponse: data,
-          isFetching: false
-        }
-      }
-      case ACTION_TYPES.REQUEST_COUNTER_ERROR: {
-        const {payload: error} = action
-        return({
           ...state,
           error,
-          isFetching: false
-        })
+          isLoading: false
+        }
       }
+      case ACTION_TYPES.LOGIN_USER_SUCCESS:
+        case ACTION_TYPES.REGISTER_USER_SUCCESS: {
+          const {payload: user} = action
+
+          return {
+            ...state,
+            user,
+            isLoading: false
+          }
+        }
+        case ACTION_TYPES.GET_TASKS_SUCCESS: {
+          const {payload: tasks} = action
+
+          return {
+            ...state,
+            tasks,
+            isLoading: false
+          }
+        }
+        case ACTION_TYPES.CREATE_TASK_SUCCESS: {
+          const {payload: task} = action
+
+          return {
+            ...state,
+            tasks: [...state.tasks,task],
+            isLoading: false
+          }
+        }
+        case ACTION_TYPES.DELETE_TASK_SUCCESS: {
+          const {payload: task} = action
+
+          return {
+            ...state,
+            tasks: state.tasks.filter(td=>td._id != task._id),
+            isLoading: false
+          }
+        }
+        case ACTION_TYPES.LOGIN_USER_REQUEST:
+          case ACTION_TYPES.REGISTER_USER_REQUEST: 
+            case ACTION_TYPES.GET_TASKS_REQUEST:
+              case ACTION_TYPES.CREATE_TASK_REQUEST:
+                case ACTION_TYPES.DELETE_TASK_REQUEST:{
+                  const {payload} = action;
+
+                  return {
+                    ...state,
+                    isLoading: true
+                  }
+                }
+      
       default: return state
       
     }

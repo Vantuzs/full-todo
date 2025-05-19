@@ -1,46 +1,106 @@
 import ACTION_TYPES from './actionTypes'
 
-export const incrementAction = ()=>{
-    return ({
-        type: ACTION_TYPES.INCREMENT
-    })
-}
+export const loginUserRequest = (payload) =>{
+    return {
+        type: ACTION_TYPES.LOGIN_USER_REQUEST,
+        payload
+    };
+};
 
-export const decrementAction = ()=>{
-    return ({
-        type: ACTION_TYPES.DECREMENT
-    })
-}
+export const loginUserSuccess = (payload)=>{
+    return {
+        type: ACTION_TYPES.LOGIN_USER_SUCCESS,
+        payload
+    };
+};
 
-export const stepAction = (step)=>{
-    return ({
-        type: ACTION_TYPES.STEP,
-        payload: {
-            step
-        }
-    })
-}
+export const loginUserError = (payload)=>{
+    return {
+        type: ACTION_TYPES.LOGIN_USER_ERROR,
+        payload
+    };
+};
 
+export const registerUserRequest = (payload) =>{
+    return {
+        type: ACTION_TYPES.REGISTER_USER_REQUEST,
+        payload
+    };
+};
 
-// Заросы на сервер
+export const registerUserSuccess = (payload) =>{
+    return {
+        type: ACTION_TYPES.REGISTER_USER_SUCCESS,
+        payload
+    };
+};
 
-export const requestCounterFetching = (counter)=>{
-    return ({
-        type: ACTION_TYPES.REQUEST_COUNTER_FETCHING,
-        payload: counter
-    });
-}
+export const registerUserError = (payload) =>{
+    return {
+        type: ACTION_TYPES.REGISTER_USER_ERROR,
+        payload
+    };
+};
 
-export const requestCounterSuccess = (data)=>{
-    return ({
-        type: ACTION_TYPES.REQUEST_COUNTER_SUCCESS,
-        payload: data
-    })
-}
+export const getTasksRequest = () =>{
+    return {
+        type: ACTION_TYPES.GET_TASKS_REQUEST
+    };
+};
 
-export const requestCounterError = (err)=>{
-    return ({
-        type: ACTION_TYPES.REQUEST_COUNTER_ERROR,
-        payload: err
-    })
-}
+export const getTasksSuccess = (payload) =>{
+    return {
+        type: ACTION_TYPES.GET_TASKS_SUCCESS,
+        payload
+    };
+};
+
+export const getTasksError = (payload) =>{
+    return {
+        type: ACTION_TYPES.GET_TASKS_ERROR,
+        payload
+    };
+};
+
+export const createTaskRequest = (payload) =>{
+    return {
+        type: ACTION_TYPES.CREATE_TASK_REQUEST,
+        payload
+    };
+};
+
+export const createTaskSuccess = (payload) =>{
+    return {
+        type: ACTION_TYPES.CREATE_TASK_SUCCESS,
+        payload
+    };
+};
+
+export const createTaskError = (payload) =>{
+    return {
+        type: ACTION_TYPES.CREATE_TASK_ERROR,
+        payload
+    };
+};
+
+export const deleteTaskRequest = (payload) =>{
+    return {
+        type: ACTION_TYPES.DELETE_TASK_REQUEST,
+        payload
+    };
+};
+
+export const deleteTaskSuccess = (payload) =>{
+    return {
+        type: ACTION_TYPES.DELETE_TASK_SUCCESS,
+        payload
+    };
+};
+
+export const deleteTaskError = (payload) =>{
+    return {
+        type: ACTION_TYPES.DELETE_TASK_ERROR,
+        payload
+    };
+};
+

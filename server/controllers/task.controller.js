@@ -9,7 +9,7 @@ module.exports.getAllUserTasks = async(req,res,next) =>{
             authorId: userId
         });
 
-        return res.status(200).send({data: userTasks})
+        return res.status(200).send({data: userTasks  })
     } catch (error) {
         next(error)
     }
