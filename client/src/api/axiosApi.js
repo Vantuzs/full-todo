@@ -29,7 +29,9 @@ export const logOut = async() =>{
 
 export const getTasks = async()=>await httpClient.get('/tasks');
 
-export const createTask = async (taskData)=> await httpClient.post('/tasks',taskData);
+export const createTask = async (taskData)=> {
+    console.log(taskData)
+    return await httpClient.post('/tasks',taskData)};
 
 export const deleteTask = async(taskId)=> await httpClient.delete(`/tasks/${taskId}`);
 
@@ -62,9 +64,10 @@ httpClient.interceptors.response.use((response)=>{
         // Повторить запрос, когда случилась ошибка 403
         await httpClient(error.config);
     }
-    if(error.response.status === 401){
+    else if(error.response.status === 401){
+        logOut();
         history.push('/')
-    }
+    } 
+    return Promise.reject(error)
 
-   return Promise.reject(error)
 });

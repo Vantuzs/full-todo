@@ -31,7 +31,8 @@ const reducer = (state = initialState,action) =>{
           return {
             ...state,
             user,
-            isLoading: false
+            isLoading: false,
+            error: null
           }
         }
         case ACTION_TYPES.GET_TASKS_SUCCESS: {
@@ -40,7 +41,8 @@ const reducer = (state = initialState,action) =>{
           return {
             ...state,
             tasks,
-            isLoading: false
+            isLoading: false,
+            error: null
           }
         }
         case ACTION_TYPES.CREATE_TASK_SUCCESS: {
@@ -49,7 +51,8 @@ const reducer = (state = initialState,action) =>{
           return {
             ...state,
             tasks: [...state.tasks,task],
-            isLoading: false
+            isLoading: false,
+            error: null
           }
         }
         case ACTION_TYPES.DELETE_TASK_SUCCESS: {
@@ -58,7 +61,8 @@ const reducer = (state = initialState,action) =>{
           return {
             ...state,
             tasks: state.tasks.filter(td=>td._id != task._id),
-            isLoading: false
+            isLoading: false,
+            error: null
           }
         }
         case ACTION_TYPES.LOGIN_USER_REQUEST:

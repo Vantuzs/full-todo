@@ -109,7 +109,8 @@ module.exports.refreshSession = async (req,res,next) =>{
             return res.status(200).send({tokens: {accessToken: newAccessToken,refreshToken: newRefreshToken}});
         } 
     } else{
-        return res.status(401).send({error: 'IDI NAHUI'})
+        // return res.status(401).send({error: 'Invalid token'})
+        throw new RefreshTokenError('Token not found')
     }
 
     } catch (error) {
