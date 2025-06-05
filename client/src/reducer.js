@@ -4,7 +4,8 @@ const initialState = {
     user: null,
     tasks: [],
     isLoading: false,
-    error: null
+    error: null,
+    notification: null
   }
 
 const reducer = (state = initialState,action) =>{
@@ -81,6 +82,13 @@ const reducer = (state = initialState,action) =>{
       case ACTION_TYPES.LOGIN_USER_REQUEST: {
         return {
           ...initialState
+        }
+      }
+      case 'NOTIFICATION': {
+        const {payload: {notification}} = action
+        return {
+          ...initialState,
+          notification
         }
       }
       
