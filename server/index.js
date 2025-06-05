@@ -17,8 +17,8 @@ io.on('connect',(socket)=>{ // socket - объект, с помощью кото
     console.log('CONNECTION =)');
 
     // задача: каждые 5 сек. отправлять на клиент какоето сообщение
-    setInterval(()=>{
-        io.emit('Deer from the future',{notification: 'Oops, I\'m late again'});
+    setTimeout(()=>{
+        io.emit('Deer from the future',{notification: `Oops, I\'m late again: ${Date.now()}`});
     },5000)
 
     socket.on('disconnect',(reason)=>{
