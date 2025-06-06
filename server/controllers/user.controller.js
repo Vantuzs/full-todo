@@ -12,9 +12,10 @@ module.exports.registrationUser = async(req,res,next) =>{
             return res.status(404).send('User not found =(')
         }
 
-        const token = await createAccessToken({userId: createUser._id,email: createUser.email})
+        const accessToken = await createAccessToken({userId: createUser._id,email: createUser.email})
+        const refreshToken = await createRefreshToken({userId: createUser._id,email: createUser.email})
 
-        return res.status(201).send({data: createUser,tokens: {token}})
+        return res.status(201).send({data: createUser,tokens: {accessToken,refreshToken}})
     } catch (error) {
         next(error)
     }
