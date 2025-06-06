@@ -10,7 +10,7 @@ const httpClient = axios.create({
     baseURL: `http://${CONSTANTS.API_BASE}` // gttp://localhost:5000/api
 })
 
-const socket = io('ws://localhost:5000', { transports: ['websocket']});
+const socket = io('ws://192.168.1.109:5000', { transports: ['websocket']});
 
 socket.on(CONSTANTS.SOCKET_EVENT_NOTIFICATION, (data)=>{
     store.dispatch({

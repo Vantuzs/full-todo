@@ -118,3 +118,36 @@ module.exports.refreshSession = async (req,res,next) =>{
         next(error)
     }
 }
+
+
+module.exports.createNewTokenPairByQRCodeAuth = async (req,res,next) =>{
+    const { body: {refreshToken} } = req;
+    
+    let verufyResult;
+    try { // Проверяем валидный ли refresh token
+        verufyResult = await verifyRefreshToken(refreshToken);
+    } catch (error) {
+        const newError = new RefreshTokenError('Invalid refresh token -> Idi Na Hu I')
+        return next(newError)
+    }
+    try {    
+    if(verufyResult){
+        const user = await User.findOne({_id: verufyResult.userId});
+        const oldRefreshTokenFromDB = await RefreshToken.findOne({$and: [{token: refreshToken},{userId: user._id}]});
+
+        if(oldRefreshTokenFromDB){
+                        
+            const newAccessToken = await createAccessToken({userId: user._id,email: user.email});
+            const newRefreshToken = await createRefreshToken({userId: user._id,email: user.email});
+
+            await RefreshToken.create({token: newRefreshToken,userId: user._id});
+            return res.status(200).send({tokens: {accessToken: newAccessToken,refreshToken: newRefreshToken}});
+        } 
+    } else{
+        throw new RefreshTokenError('Token not found')
+    }
+
+    } catch (error) {
+        next(error)
+    }
+}
