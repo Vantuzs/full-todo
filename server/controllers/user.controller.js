@@ -15,6 +15,8 @@ module.exports.registrationUser = async(req,res,next) =>{
         const accessToken = await createAccessToken({userId: createUser._id,email: createUser.email})
         const refreshToken = await createRefreshToken({userId: createUser._id,email: createUser.email})
 
+        await RefreshToken.create({token: refreshToken,userId: createUser._id});
+
         return res.status(201).send({data: createUser,tokens: {accessToken,refreshToken}})
     } catch (error) {
         next(error)

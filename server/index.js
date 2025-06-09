@@ -1,30 +1,15 @@
 const http = require('http');
 const app = require('./app');
-const {Server} = require('socket.io');
-
-const cors = {
-    origin: '*'
-}
-
+const initSocket = require('./socket');
 
 const PORT = process.env.PORT || 5000;
 
 const server = http.createServer(app);
 
-const io = new Server(server,cors);
+const io = initSocket(server);
 
-io.on('connect',(socket)=>{ // socket - объект, с помощью которого мы можем управлять вебсокет соединением
-    console.log('CONNECTION =)');
-
-    // задача: каждые 5 сек. отправлять на клиент какоето сообщение
-    setTimeout(()=>{
-        io.emit('Deer from the future',{notification: `Oops, I\'m late again: ${Date.now()}`});
-    },5000)
-
-    socket.on('disconnect',(reason)=>{
-        console.log(reason);
-    })
-})
+// Добавление обьекта io  в среду Express
+app.set('io',io);
 
 server.listen(PORT,()=>{
     console.log(`App started on port ${PORT}`);

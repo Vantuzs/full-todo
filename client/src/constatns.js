@@ -1,6 +1,8 @@
 const CONSTANTS = {
     API_BASE: '192.168.1.109:5000/api',
-    SOCKET_EVENT_NOTIFICATION: 'Deer from the future'
+    SOCKET_EVENT_NOTIFICATION: 'Deer from the future',
+    IPv4_ADDRESS: '192.168.1.109',
+    SOCKET_REFRESH_TASK_LIST: 'SOCKET_REFRESH_TASK_LIST'
 }
 
 export default CONSTANTS;

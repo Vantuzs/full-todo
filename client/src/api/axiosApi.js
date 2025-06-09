@@ -3,6 +3,7 @@ import CONSTANTS from '../constatns';
 import history from '../BrowserHistory';
 import store from '../store';
 import io from 'socket.io-client';
+import { refreshTaskList } from '../actions/actionCreater';
 
 
 // INSTANCE
@@ -10,13 +11,17 @@ const httpClient = axios.create({
     baseURL: `http://${CONSTANTS.API_BASE}` // gttp://localhost:5000/api
 })
 
-const socket = io('ws://192.168.1.109:5000', { transports: ['websocket']});
+const socket = io(`ws://${CONSTANTS.IPv4_ADDRESS}:5000`, { transports: ['websocket']});
 
 socket.on(CONSTANTS.SOCKET_EVENT_NOTIFICATION, (data)=>{
     store.dispatch({
         type: 'NOTIFICATION',
         payload: data
-    })
+    });
+});
+
+socket.on(CONSTANTS.SOCKET_REFRESH_TASK_LIST,()=>{
+    store.dispatch(refreshTaskList());
 })
 
 // USERAPI
